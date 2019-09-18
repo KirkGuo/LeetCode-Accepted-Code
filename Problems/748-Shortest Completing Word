@@ -1,0 +1,17 @@
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        cnt = collections.Counter(licensePlate.lower())
+        words = sorted(words, key= lambda item:len(item))
+        print(cnt)
+        for each in words:
+            tmp = collections.Counter(each.lower())
+            print(tmp)
+            mark = True
+            for item in cnt:
+                if item in '0123456789 ':
+                    continue
+                if item not in tmp or tmp[item] < cnt[item]:
+                    mark = False
+                    break
+            if mark:
+                return each
